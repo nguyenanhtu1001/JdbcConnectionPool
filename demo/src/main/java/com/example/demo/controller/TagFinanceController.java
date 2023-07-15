@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tagfinances")
+@RequestMapping("/tag-finances")
 public class TagFinanceController {
     private final TagFinanceService tagFinanceService;
 
