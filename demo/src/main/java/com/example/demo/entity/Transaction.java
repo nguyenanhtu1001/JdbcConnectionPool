@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class Transaction implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Create_at")
-    private String createdAt;
+    private Date createdAt;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
@@ -27,7 +28,7 @@ public class Transaction implements Serializable {
     private int tagId;
     private TagFinance tagFinance;
 
-    public Transaction(String createdAt, String title, String description, double amount, int tagId, TagFinance tagFinance) {
+    public Transaction(Date createdAt, String title, String description, double amount, int tagId, TagFinance tagFinance) {
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;

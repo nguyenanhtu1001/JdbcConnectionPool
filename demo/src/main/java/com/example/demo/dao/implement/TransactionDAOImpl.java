@@ -29,7 +29,7 @@ public class TransactionDAOImpl implements TransactionDAO {
             PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                String createAt = rs.getString("Create_at");
+                java.util.Date createAt = rs.getDate("Create_at");
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String description = rs.getString("description");
