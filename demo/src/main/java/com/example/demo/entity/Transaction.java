@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Data
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "Transactions")
 public class Transaction implements Serializable {
     @Id
@@ -35,14 +35,6 @@ public class Transaction implements Serializable {
         this.amount = amount;
         this.tagId = tagId;
         this.tagFinance = tagFinance;
-    }
-
-    public void setTagFinance(TagFinance tagFinance) {
-        this.tagFinance = tagFinance;
-    }
-
-    public TagFinance getTagFinance() {
-        return tagFinance;
     }
 
 }

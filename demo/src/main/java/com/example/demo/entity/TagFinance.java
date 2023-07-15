@@ -8,7 +8,6 @@ import org.springframework.data.relational.core.mapping.Table;
 import java.io.Serializable;
 
 @Entity
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
