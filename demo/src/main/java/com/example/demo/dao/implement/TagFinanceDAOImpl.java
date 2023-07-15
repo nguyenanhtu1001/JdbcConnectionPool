@@ -46,15 +46,16 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public void updateTagFinance(int id, String name, String description) {
+    public void updateTagFinance( String name, String description, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
 
             PreparedStatement pstmt = conn.prepareStatement(UPDATE_TAG);
-            pstmt.setInt(3, id);
+
             pstmt.setString(1, name);
-            pstmt.setString(2, description);
+            pstmt.setString(2,description);
+            pstmt.setInt(3, id);
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {

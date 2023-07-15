@@ -9,7 +9,7 @@ import java.util.List;
 public interface TagFinanceService {
     void createTag(TagfinanceRequestDTO tagfinanceRequestDTO) throws Exception;
 
-    void updateTag(int Id, TagfinanceRequestDTO tagfinanceRequestDTO) throws Exception;
+    void updateTag(TagfinanceRequestDTO tagfinanceRequestDTO, int Id) throws Exception;
 
     void deleteTag(int Id) throws Exception;
 

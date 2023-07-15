@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TagFinanceDAO {
 
-    void updateTagFinance(int id, String name, String description) throws Exception;
+    void updateTagFinance(String name, String description, int id) throws Exception;
 
     List<TagFinance> getAllTagFinance() throws Exception;
 

@@ -30,7 +30,7 @@ public class TagFinanceController {
 
     @PutMapping("/update/{id}")
     public void update(@RequestBody TagfinanceRequestDTO tagFinance, @PathVariable(name = "id") int id) throws Exception {
-        tagFinanceService.updateTag(id, tagFinance);
+        tagFinanceService.updateTag(tagFinance,id);
     }
 
     @DeleteMapping("/delete/{id}")
