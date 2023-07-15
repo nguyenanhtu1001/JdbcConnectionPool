@@ -2,7 +2,7 @@ package com.example.demo.dao.implement;
 
 import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TagFinanceDAO;
-import com.example.demo.data.entity.TagFinance;
+import com.example.demo.entity.TagFinance;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class TagFinanceDAOImpl implements TagFinanceDAO {
-    public static final String ADD_TAG = "INSERT INTO TagFinance(name,description) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT id, name, description FROM TagFinance";
-    public static final String DELETE_TRAN = "DELETE FROM TagFinance WHERE id =?";
-    public static String UPDATE_TAG = "UPDATE TagFinance SET name =?, description =? WHERE id =?";
-    public static final String GET_TAG = "SELECT * FROM TagFinance WHERE id =?";
+    public static final String ADD_TAG = "INSERT INTO Tag_Finances(name,description) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT id, name, description FROM Tag_Finances";
+    public static final String DELETE_TRAN = "DELETE FROM Tag_Finances WHERE id =?";
+    public static String UPDATE_TAG = "UPDATE Tag_Finances SET name =?, description =? WHERE id =?";
+    public static final String GET_TAG = "SELECT * FROM Tag_Finances WHERE id =?";
 
     @Override
     public void createTagFinance(String name, String description) throws SQLException {
@@ -46,7 +46,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public void updateTagFinance(int id,String name, String description ){
+    public void updateTagFinance(int id, String name, String description) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();

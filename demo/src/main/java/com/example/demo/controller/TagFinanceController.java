@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.data.dto.request.TagfinanceRequestDTO;
-import com.example.demo.data.dto.response.TagFinanceResponseDTO;
+import com.example.demo.dto.request.TagfinanceRequestDTO;
+import com.example.demo.dto.response.TagFinanceResponseDTO;
 import com.example.demo.service.TagFinanceService;
 import org.springframework.web.bind.annotation.*;
 

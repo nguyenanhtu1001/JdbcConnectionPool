@@ -1,9 +1,9 @@
-package com.example.demo.data.dto.response;
+package com.example.demo.dto.response;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import com.example.demo.data.entity.TagFinance;
+import com.example.demo.entity.TagFinance;
 import lombok.Setter;
 
 @Data

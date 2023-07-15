@@ -1,6 +1,6 @@
-package com.example.demo.data.entity;
+package com.example.demo.entity;
 
-import com.example.demo.data.dto.request.TagfinanceRequestDTO;
+import com.example.demo.dto.request.TagfinanceRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "TagFinance")
+@Table(name = "Tag_Finances")
 public class TagFinance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,4 @@ public class TagFinance implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-
-    public TagFinance(TagfinanceRequestDTO tagfinanceRequestDTO) {
-
-    }
-
-
 }

@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.data.dto.request.TransactionRequestDTO;
-import com.example.demo.data.dto.response.TransactionResponseDTO;
+import com.example.demo.dto.request.TransactionRequestDTO;
+import com.example.demo.dto.response.TransactionResponseDTO;
 import com.example.demo.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,16 +1,21 @@
-package com.example.demo.data.entity;
+package com.example.demo.entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
+
 @Entity
 @Data
 @Getter
 @Setter
-@Table(name ="Transactions")
-public class Transaction implements Serializable{
-    @Column(name = "createdAt")
+@Table(name = "Transactions")
+public class Transaction implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "Create_at")
     private String createdAt;
     @Column(name = "title")
     private String title;
@@ -18,22 +23,10 @@ public class Transaction implements Serializable{
     private String description;
     @Column(name = "amount")
     private double amount;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tagId")
+    @Column(name = "Tag_id")
     private int tagId;
     private TagFinance tagFinance;
 
-//    public Transactions(String createAt, String title, String description, double amount, int tagId, TagFinance tagFinance) {
-//    }
-
-    public Transaction(String createdAt, String title, String description, double amount, int tagId) {
-        this.createdAt = createdAt;
-        this.title = title;
-        this.description = description;
-        this.amount = amount;
-        this.tagId = tagId;
-    }
     public Transaction(String createdAt, String title, String description, double amount, int tagId, TagFinance tagFinance) {
         this.createdAt = createdAt;
         this.title = title;
@@ -42,12 +35,13 @@ public class Transaction implements Serializable{
         this.tagId = tagId;
         this.tagFinance = tagFinance;
     }
+
     public void setTagFinance(TagFinance tagFinance) {
         this.tagFinance = tagFinance;
     }
+
     public TagFinance getTagFinance() {
         return tagFinance;
     }
-
 
 }
