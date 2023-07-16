@@ -26,15 +26,15 @@ public class Transaction implements Serializable {
     private double amount;
     @Column(name = "Tag_id")
     private int tagId;
-    private TagFinance tagFinance;
 
-    public Transaction(Date createdAt, String title, String description, double amount, int tagId, TagFinance tagFinance) {
+    public Transaction(Date createdAt, String title, String description, double amount, int id, int tagId) {
         this.createdAt = createdAt;
         this.title = title;
         this.description = description;
         this.amount = amount;
+        this.id = id;
         this.tagId = tagId;
-        this.tagFinance = tagFinance;
     }
+
 
 }

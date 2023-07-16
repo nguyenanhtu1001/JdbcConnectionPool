@@ -6,11 +6,11 @@ import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "Tag_Finances")
 public class TagFinance implements Serializable {
@@ -21,4 +21,11 @@ public class TagFinance implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
+    private Transaction transactions;
+    public TagFinance(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
 }
