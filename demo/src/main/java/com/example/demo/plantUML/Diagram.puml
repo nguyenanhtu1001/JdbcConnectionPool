@@ -1,0 +1,29 @@
+@startuml
+
+class TagFinance {
+  - id: int
+  - name: String
+  - description: String
+  + getAll(): List<TagFinance>
+  + update(): void
+  + delete(): void
+  + getById(id: int): TagFinance
+  + create(): void
+}
+
+class Transaction {
+  - id: int
+  - title: String
+  - description: String
+  - createdAt: Date
+  - amount: double
+  - tagId: int
+  + getAll(): List<Transaction>
+  + delete(): void
+  + update(): void
+  + get(): List<Transaction>
+}
+
+TagFinance "1" -- "*" Transaction: contains
+
+@enduml
