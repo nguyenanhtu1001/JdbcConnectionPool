@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tag-finances")
+@RequestMapping("api/v1/tag-finances")
 public class TagFinanceController {
     private final TagFinanceService tagFinanceService;
 
@@ -17,9 +17,9 @@ public class TagFinanceController {
     }
 
     @PostMapping("/create")
-    public TagfinanceRequestDTO create(@RequestBody TagfinanceRequestDTO tagFinance) throws Exception {
-        tagFinanceService.createTag(tagFinance);
-        return tagFinance;
+    public TagfinanceRequestDTO create(@RequestBody TagfinanceRequestDTO tagfinanceRequestDTO) throws Exception {
+        tagFinanceService.createTag(tagfinanceRequestDTO);
+        return tagfinanceRequestDTO;
     }
 
     @GetMapping("/get")
@@ -29,8 +29,8 @@ public class TagFinanceController {
     }
 
     @PutMapping("/update/{id}")
-    public void update(@RequestBody TagfinanceRequestDTO tagFinance, @PathVariable(name = "id") int id) throws Exception {
-        tagFinanceService.updateTag(tagFinance,id);
+    public void update(@RequestBody TagfinanceRequestDTO tagfinanceRequestDTO, @PathVariable(name = "id") int id) throws Exception {
+        tagFinanceService.updateTag(tagfinanceRequestDTO,id);
     }
 
     @DeleteMapping("/delete/{id}")
