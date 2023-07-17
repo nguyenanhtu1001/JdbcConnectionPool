@@ -4,11 +4,11 @@ class TagFinance {
   - id: int
   - name: String
   - description: String
-  + getAll(): List<TagFinance>
-  + update(): void
-  + delete(): void
-  + getById(id: int): TagFinance
-  + create(): void
+  + getAllTagFinance: List<TagFinance>
+  + updateTagFinance: void
+  + deleteTagFinance: void
+  + getTagFinanceById(id: int): TagFinance
+  + createTagFinance: void
 }
 
 class Transaction {
@@ -18,10 +18,10 @@ class Transaction {
   - createdAt: Date
   - amount: double
   - tagId: int
-  + getAll(): List<Transaction>
-  + delete(): void
-  + update(): void
-  + get(): List<Transaction>
+  + getAllTransactions(): List<Transaction>
+  + deleteTransaction(): void
+  + updateTransaction(): void
+  + createTransaction(): List<Transaction>
 }
 
 TagFinance "1" -- "*" Transaction: contains
