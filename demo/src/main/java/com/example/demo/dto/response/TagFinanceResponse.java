@@ -10,10 +10,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class TagFinanceResponseDTO {
+public class TagFinanceResponse {
     private String name;
     private String description;
-    public TagFinanceResponseDTO(TagFinance tagfinance ){
+    public TagFinanceResponse(TagFinance tagfinance ){
         this.name = tagfinance.getName();
         this.description = tagfinance.getDescription();
     }

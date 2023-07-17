@@ -2,8 +2,8 @@ package com.example.demo.service.implement;
 
 import com.example.demo.dao.TagFinanceDAO;
 import com.example.demo.dao.implement.TagFinanceDAOImpl;
-import com.example.demo.dto.request.TagfinanceRequestDTO;
-import com.example.demo.dto.response.TagFinanceResponseDTO;
+import com.example.demo.dto.request.TagfinanceRequest;
+import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.entity.TagFinance;
 import com.example.demo.service.TagFinanceService;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +16,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TagFinanceServiceImpl implements TagFinanceService {
     private final TagFinanceDAO tagFinanceDAO = new TagFinanceDAOImpl();
-    public static List<TagFinanceResponseDTO> tagFinanceDTO = new ArrayList<>();
+    public static List<TagFinanceResponse> tagFinanceDTO = new ArrayList<>();
 
     @Override
-    public List<TagFinanceResponseDTO> getAllTagFinance() throws Exception {
+    public List<TagFinanceResponse> getAllTagFinance() throws Exception {
         List<TagFinance> tagFinanceList = tagFinanceDAO.getAllTagFinance();
         for (int i = 0; i < tagFinanceList.size(); i++) {
-            TagFinanceResponseDTO tagFinanceResponseDTO = new TagFinanceResponseDTO(tagFinanceList.get(i));
+            TagFinanceResponse tagFinanceResponseDTO = new TagFinanceResponse(tagFinanceList.get(i));
             tagFinanceDTO.add(tagFinanceResponseDTO);
         }
         return tagFinanceDTO;
@@ -34,12 +34,12 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public void createTag(TagfinanceRequestDTO tagfinanceRequestDTO) throws Exception {
+    public void createTag(TagfinanceRequest tagfinanceRequestDTO) throws Exception {
         tagFinanceDAO.createTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription());
     }
 
     @Override
-    public void updateTag(TagfinanceRequestDTO tagfinanceRequestDTO, int Id) throws Exception {
+    public void updateTag(TagfinanceRequest tagfinanceRequestDTO, int Id) throws Exception {
         tagFinanceDAO.updateTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription(), Id);
     }
 

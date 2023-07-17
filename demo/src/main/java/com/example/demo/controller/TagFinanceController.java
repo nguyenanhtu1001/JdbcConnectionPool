@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.request.TagfinanceRequestDTO;
-import com.example.demo.dto.response.TagFinanceResponseDTO;
+import com.example.demo.dto.request.TagfinanceRequest;
+import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.service.TagFinanceService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,19 +17,19 @@ public class TagFinanceController {
     }
 
     @PostMapping("/create")
-    public TagfinanceRequestDTO create(@RequestBody TagfinanceRequestDTO tagfinanceRequestDTO) throws Exception {
+    public TagfinanceRequest create(@RequestBody TagfinanceRequest tagfinanceRequestDTO) throws Exception {
         tagFinanceService.createTag(tagfinanceRequestDTO);
         return tagfinanceRequestDTO;
     }
 
     @GetMapping("/get")
-    public List<TagFinanceResponseDTO> getTagFinance() throws Exception {
-        List<TagFinanceResponseDTO> list = tagFinanceService.getAllTagFinance();
+    public List<TagFinanceResponse> getTagFinance() throws Exception {
+        List<TagFinanceResponse> list = tagFinanceService.getAllTagFinance();
         return list;
     }
 
     @PutMapping("/update/{id}")
-    public void update(@RequestBody TagfinanceRequestDTO tagfinanceRequestDTO, @PathVariable(name = "id") int id) throws Exception {
+    public void update(@RequestBody TagfinanceRequest tagfinanceRequestDTO, @PathVariable(name = "id") int id) throws Exception {
         tagFinanceService.updateTag(tagfinanceRequestDTO,id);
     }
 

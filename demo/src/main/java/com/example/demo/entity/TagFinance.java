@@ -1,12 +1,10 @@
 package com.example.demo.entity;
 
-import com.example.demo.dto.request.TagfinanceRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Getter

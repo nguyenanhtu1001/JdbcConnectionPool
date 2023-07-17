@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.request.TransactionRequestDTO;
-import com.example.demo.dto.response.TransactionResponseDTO;
+import com.example.demo.dto.request.TransactionRequest;
+import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.service.TransactionService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +18,13 @@ public class TransactionController {
 
 
     @GetMapping("get")
-    public List<TransactionResponseDTO> getAll() throws Exception {
-        List<TransactionResponseDTO> list = transactionService.getTransaction();
+    public List<TransactionResponse> getAll() throws Exception {
+        List<TransactionResponse> list = transactionService.getTransaction();
         return list;
     }
 
     @PostMapping("create")
-    public TransactionRequestDTO create(@RequestBody TransactionRequestDTO transactionRequestDTO) throws Exception {
+    public TransactionRequest create(@RequestBody TransactionRequest transactionRequestDTO) throws Exception {
         transactionService.create(transactionRequestDTO);
         return transactionRequestDTO;
     }
@@ -35,7 +35,7 @@ public class TransactionController {
     }
 
     @PutMapping("update/{id}")
-    public void update(@RequestBody TransactionRequestDTO transactionRequestDTO, @PathVariable(name = "id") int id) throws Exception {
+    public void update(@RequestBody TransactionRequest transactionRequestDTO, @PathVariable(name = "id") int id) throws Exception {
         transactionService.updateTransaction(transactionRequestDTO, id);
     }
 }

@@ -10,14 +10,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TransactionResponseDTO {
+public class TransactionResponse {
     private String title;
     private String description;
     private double amount;
     private int tagId;
-    private TagFinanceResponseDTO tagFinance;
+    private TagFinanceResponse tagFinance;
 
-    public TransactionResponseDTO(Transaction transaction, TagFinanceResponseDTO tagFinance) {
+    public TransactionResponse(Transaction transaction, TagFinanceResponse tagFinance) {
         this.title = transaction.getTitle();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();

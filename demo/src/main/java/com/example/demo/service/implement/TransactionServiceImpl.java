@@ -4,9 +4,9 @@ import com.example.demo.dao.TagFinanceDAO;
 import com.example.demo.dao.TransactionDAO;
 import com.example.demo.dao.implement.TagFinanceDAOImpl;
 import com.example.demo.dao.implement.TransactionDAOImpl;
-import com.example.demo.dto.request.TransactionRequestDTO;
-import com.example.demo.dto.response.TagFinanceResponseDTO;
-import com.example.demo.dto.response.TransactionResponseDTO;
+import com.example.demo.dto.request.TransactionRequest;
+import com.example.demo.dto.response.TagFinanceResponse;
+import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.TagFinance;
 import com.example.demo.entity.Transaction;
 import com.example.demo.service.TransactionService;
@@ -20,10 +20,10 @@ public class TransactionServiceImpl implements TransactionService {
     private final TagFinanceDAO tagFinanceDAO = new TagFinanceDAOImpl();
     private final TransactionDAO transactionDAO = new TransactionDAOImpl();
 
-    public static List<TransactionResponseDTO> transactionDTO = new ArrayList<>();
+    public static List<TransactionResponse> transactionDTO = new ArrayList<>();
 
     @Override
-    public void create(TransactionRequestDTO transactionRequestDTO) {
+    public void create(TransactionRequest transactionRequestDTO) {
         transactionDAO.createTransaction(transactionRequestDTO.getTitle(),
                 transactionRequestDTO.getDescription(),
                 transactionRequestDTO.getAmount(),
@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void updateTransaction(TransactionRequestDTO transactionRequestDTO, int id) throws Exception {
+    public void updateTransaction(TransactionRequest transactionRequestDTO, int id) throws Exception {
         transactionDAO.updateTransaction(transactionRequestDTO.getTitle(),
                 transactionRequestDTO.getDescription(),
                 transactionRequestDTO.getAmount(),
@@ -44,13 +44,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionResponseDTO> getTransaction() throws Exception {
+    public List<TransactionResponse> getTransaction() throws Exception {
         List<Transaction> transactionList = transactionDAO.getAllTransactions();
         for (int i = 0; i < transactionList.size(); i++) {
             System.out.println(transactionList.get(i).getTagId());
             TagFinance tagFinance = tagFinanceDAO.getTagFinanceById(transactionList.get(i).getTagId());
-            TagFinanceResponseDTO tagFinanceResponseDTO = new TagFinanceResponseDTO(tagFinance);
-            TransactionResponseDTO transactionResponseDTO = new TransactionResponseDTO(transactionList.get(i), tagFinanceResponseDTO);
+            TagFinanceResponse tagFinanceResponseDTO = new TagFinanceResponse(tagFinance);
+            TransactionResponse transactionResponseDTO = new TransactionResponse(transactionList.get(i), tagFinanceResponseDTO);
             transactionDTO.add(transactionResponseDTO);
         }
         return transactionDTO;
