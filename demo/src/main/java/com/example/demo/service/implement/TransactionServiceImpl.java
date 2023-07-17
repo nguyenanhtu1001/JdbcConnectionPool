@@ -5,7 +5,9 @@ import com.example.demo.dao.TransactionDAO;
 import com.example.demo.dao.implement.TagFinanceDAOImpl;
 import com.example.demo.dao.implement.TransactionDAOImpl;
 import com.example.demo.dto.request.TransactionRequestDTO;
+import com.example.demo.dto.response.TagFinanceResponseDTO;
 import com.example.demo.dto.response.TransactionResponseDTO;
+import com.example.demo.entity.TagFinance;
 import com.example.demo.entity.Transaction;
 import com.example.demo.service.TransactionService;
 import org.springframework.stereotype.Service;
@@ -45,9 +47,13 @@ public class TransactionServiceImpl implements TransactionService {
     public List<TransactionResponseDTO> getTransaction() throws Exception {
         List<Transaction> transactionList = transactionDAO.getAllTransactions();
         for (int i = 0; i < transactionList.size(); i++) {
-            TransactionResponseDTO transactionResponseDTO = new TransactionResponseDTO(transactionList.get(i));
+            System.out.println(transactionList.get(i).getTagId());
+            TagFinance tagFinance = tagFinanceDAO.getTagFinanceById(transactionList.get(i).getTagId());
+            TagFinanceResponseDTO tagFinanceResponseDTO = new TagFinanceResponseDTO(tagFinance);
+            TransactionResponseDTO transactionResponseDTO = new TransactionResponseDTO(transactionList.get(i), tagFinanceResponseDTO);
             transactionDTO.add(transactionResponseDTO);
         }
         return transactionDTO;
+
     }
 }

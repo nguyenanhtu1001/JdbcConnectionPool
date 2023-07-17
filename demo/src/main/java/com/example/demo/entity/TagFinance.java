@@ -21,7 +21,7 @@ public class TagFinance implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-    private Transaction transactions;
+
     public TagFinance(int id, String name, String description) {
         this.id = id;
         this.name = name;

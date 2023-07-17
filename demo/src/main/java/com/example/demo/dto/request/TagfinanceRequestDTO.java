@@ -12,9 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @NoArgsConstructor
 public class TagfinanceRequestDTO {
-    @NotEmpty(message = "Tag Finance name not blank")
     private String name;
-    @NotEmpty(message = "Tag Finance description not blank")
     private String description;
 
     public TagfinanceRequestDTO(String name, String description) {

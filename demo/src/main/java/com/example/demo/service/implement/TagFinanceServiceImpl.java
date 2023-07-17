@@ -39,8 +39,8 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public void updateTag( TagfinanceRequestDTO tagfinanceRequestDTO,int Id) throws Exception {
-        tagFinanceDAO.updateTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription(),Id);
+    public void updateTag(TagfinanceRequestDTO tagfinanceRequestDTO, int Id) throws Exception {
+        tagFinanceDAO.updateTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription(), Id);
     }
 
     @Override

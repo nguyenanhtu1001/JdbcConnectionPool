@@ -17,7 +17,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     public static final String SELECT_ALL = "SELECT id, name, description FROM Tag_Finances";
     public static final String DELETE_TRAN = "DELETE FROM Tag_Finances WHERE id =?";
     public static String UPDATE_TAG = "UPDATE Tag_Finances SET name =?, description =? WHERE id =?";
-    public static final String GET_TAG = "SELECT * FROM Tag_Finances WHERE id =?";
+    public static final String GET_TAG = "SELECT id, name, description FROM Tag_Finances WHERE id =?";
 
     @Override
     public void createTagFinance(String name, String description) throws SQLException {
@@ -46,7 +46,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public void updateTagFinance( String name, String description, int id) {
+    public void updateTagFinance(String name, String description, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -54,7 +54,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
             PreparedStatement pstmt = conn.prepareStatement(UPDATE_TAG);
 
             pstmt.setString(1, name);
-            pstmt.setString(2,description);
+            pstmt.setString(2, description);
             pstmt.setInt(3, id);
             pstmt.executeUpdate();
             conn.commit();
@@ -144,6 +144,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
         try {
             conn = DataSource.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(GET_TAG);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 TagFinance tagFinanceGet = new TagFinance(

@@ -15,18 +15,15 @@ public class TransactionResponseDTO {
     private String description;
     private double amount;
     private int tagId;
+    private TagFinanceResponseDTO tagFinance;
 
-    public TransactionResponseDTO(String title, String description, int amount, int tagId) {
-        this.title = title;
-        this.description = description;
-        this.amount = amount;
-        this.tagId = tagId;
-    }
-
-    public TransactionResponseDTO(Transaction transaction) {
+    public TransactionResponseDTO(Transaction transaction, TagFinanceResponseDTO tagFinance) {
         this.title = transaction.getTitle();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();
         this.tagId = transaction.getTagId();
+        this.tagFinance = tagFinance;
     }
+
+
 }
