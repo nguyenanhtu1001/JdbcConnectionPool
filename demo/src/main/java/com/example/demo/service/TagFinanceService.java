@@ -7,13 +7,14 @@ import com.example.demo.entity.TagFinance;
 import java.util.List;
 
 public interface TagFinanceService {
-    void createTag(TagfinanceRequest tagfinanceRequestDTO) throws Exception;
+    TagFinanceResponse createTagFinance(TagfinanceRequest tagFinanceRequest);
 
-    void updateTag(TagfinanceRequest tagfinanceRequestDTO, int Id) throws Exception;
+    TagFinanceResponse updateTagFinance(TagfinanceRequest tagfinanceRequest, int Id);
 
-    void deleteTag(int Id) throws Exception;
+    void deleteTagFinance(int Id);
 
-    List<TagFinanceResponse> getAllTagFinance() throws Exception;
+    List<TagFinanceResponse> getAllTagFinance();
 
-    TagFinance getTagFinanceById(int id) throws Exception;
+    TagFinanceResponse getTagFinanceById(int id);
+
 }

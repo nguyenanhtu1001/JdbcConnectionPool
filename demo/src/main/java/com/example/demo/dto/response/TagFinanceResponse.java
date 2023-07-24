@@ -1,20 +1,24 @@
 package com.example.demo.dto.response;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import com.example.demo.entity.TagFinance;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpStatusCode;
 
-@Data
-@NoArgsConstructor
-@Setter
 @Getter
+@Setter
+@NoArgsConstructor
 public class TagFinanceResponse {
     private String name;
     private String description;
-    public TagFinanceResponse(TagFinance tagfinance ){
-        this.name = tagfinance.getName();
-        this.description = tagfinance.getDescription();
+
+    public TagFinanceResponse(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+    public TagFinanceResponse(TagFinance tagFinance){
+        this.name = tagFinance.getName();
+        this.description = tagFinance.getDescription();
     }
 }

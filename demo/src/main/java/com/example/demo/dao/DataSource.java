@@ -15,7 +15,7 @@ public class DataSource {
     private static DataSource dataSource;
 
     static {
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/TagFinance");
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/finance_database2");
         config.setUsername("root");
         config.setPassword("123456");
         config.setMaximumPoolSize(10);

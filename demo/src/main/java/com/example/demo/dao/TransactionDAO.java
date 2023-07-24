@@ -1,15 +1,17 @@
 package com.example.demo.dao;
 
+import com.example.demo.dto.request.TransactionRequest;
+import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.Transaction;
 
 import java.util.List;
 
 public interface TransactionDAO {
-    List<Transaction> getAllTransactions();
+    List<TransactionResponse> getAllTransactions();
 
-    void createTransaction(String title, String description, double amount, int tagId);
+    TransactionRequest createTransaction(TransactionRequest transaction);
 
-    void updateTransaction(String title, String description, double amount, int tagId,int id);
+    Transaction updateTransaction(Transaction transaction, int id);
 
     void deleteTransaction(int id);
 

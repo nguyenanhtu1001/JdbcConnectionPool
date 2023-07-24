@@ -3,40 +3,51 @@ package com.example.demo.dao.implement;
 
 import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TransactionDAO;
-import com.example.demo.entity.TagFinance;
+import com.example.demo.dto.request.TransactionRequest;
+import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.Transaction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TransactionDAOImpl implements TransactionDAO {
-    public static final String SELECT_ALL = "SELECT * FROM Transactions inner join Tag_Finances on Transactions.tag_Id = Tag_Finances.id ";
-    public static final String INSERT_TRAN = "INSERT INTO Transactions (title, description,amount,tag_Id) VALUES (?,?,?,?)";
-    public static final String UPDATE_TRANSACTION = "UPDATE Transactions SET title=?, description =?,amount=?, tag_Id=? WHERE id =?";
-    public static final String DELETE_TRAN = "DELETE FROM Transactions WHERE id =?";
+    public static final String CREATE_TRANSACTION_TAG = "INSERT INTO Transaction_Tag_Finance (tag_id, transaction_id) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT * FROM Transaction inner join Transaction_Tag_Finance on Transaction.id=Transaction_Tag_Finance.transaction_id";
+    public static final String INSERT_TRAN = "INSERT INTO Transaction (title, description,amount) VALUES (?,?,?)";
+    public static final String UPDATE_TRANSACTION = "UPDATE Transaction SET title=?, description =?,amount=? WHERE id =?";
+    public static final String DELETE_TRAN = "DELETE FROM Transaction WHERE id =?";
+    private static final String SELECT_ALL_TRANSACTIONS = "SELECT id, title, create_at, amount, description FROM Transaction";
+
+    private static final String SELECT_TAGS_BY_TRANSACTION_ID = "SELECT tag_id FROM Transaction_Tag_Finance WHERE transaction_id = ?";
+
 
     @Override
-    public List<Transaction> getAllTransactions() {
+    public List<TransactionResponse> getAllTransactions() {
         Connection conn = null;
-        List<Transaction> list = new ArrayList<>();
+        List<TransactionResponse> list = new ArrayList<>();
         try {
             conn = DataSource.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                java.util.Date createAt = rs.getDate("Create_at");
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String description = rs.getString("description");
                 double amount = rs.getDouble("amount");
-                int tagId = rs.getInt("Tag_id");
-                Transaction transaction = new Transaction(createAt, title, description, amount, id,tagId);
-                list.add(transaction);
+
+                PreparedStatement pstmtTags = conn.prepareStatement(SELECT_TAGS_BY_TRANSACTION_ID);
+                pstmtTags.setInt(1, id);
+                ResultSet rsTags = pstmtTags.executeQuery();
+
+                List<Integer> tagIds = new ArrayList<>();
+                while (rsTags.next()) {
+                    int tagId = rsTags.getInt("tag_id");
+                    tagIds.add(tagId);
+                }
+                TransactionResponse response = new TransactionResponse(id, title, description, amount,tagIds);
+                list.add(response);
             }
 
         } catch (SQLException e) {
@@ -61,17 +72,34 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public void createTransaction(String title, String description, double amount, int tagId) {
+    public TransactionRequest createTransaction(TransactionRequest transactionRequest) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(INSERT_TRAN);
-            pstmt.setString(1, title);
-            pstmt.setString(2, description);
-            pstmt.setDouble(3, amount);
-            pstmt.setInt(4, tagId);
-            pstmt.executeUpdate();
+
+            PreparedStatement insertTransactionStmt = conn.prepareStatement(INSERT_TRAN, Statement.RETURN_GENERATED_KEYS);
+            insertTransactionStmt.setString(1, transactionRequest.getTitle());
+            insertTransactionStmt.setString(2, transactionRequest.getDescription());
+            insertTransactionStmt.setDouble(3, transactionRequest.getAmount());
+            insertTransactionStmt.executeUpdate();
+
+            ResultSet generatedKeys = insertTransactionStmt.getGeneratedKeys();
+            int transactionId;
+            if (generatedKeys.next()) {
+                transactionId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Failed to retrieve generated transaction ID");
+            }
+
+            for (int tagId : transactionRequest.getTagId()) {
+                PreparedStatement createTransactionTagStmt = conn.prepareStatement(CREATE_TRANSACTION_TAG);
+                createTransactionTagStmt.setInt(1, tagId);
+                createTransactionTagStmt.setInt(2, transactionId);
+                createTransactionTagStmt.executeUpdate();
+            }
+
             conn.commit();
+
         } catch (SQLException e) {
             if (conn != null) {
                 try {
@@ -90,19 +118,19 @@ public class TransactionDAOImpl implements TransactionDAO {
                 }
             }
         }
+        return transactionRequest;
     }
 
     @Override
-    public void updateTransaction(String title, String description, double amount, int tagId, int id) {
+    public Transaction updateTransaction(Transaction transaction, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(UPDATE_TRANSACTION);
-            pstmt.setString(1, title);
-            pstmt.setString(2, description);
-            pstmt.setDouble(3, amount);
-            pstmt.setInt(4, tagId);
-            pstmt.setInt(5, id);
+            pstmt.setString(1, transaction.getTitle());
+            pstmt.setString(2, transaction.getDescription());
+            pstmt.setDouble(3, transaction.getAmount());
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
@@ -123,6 +151,7 @@ public class TransactionDAOImpl implements TransactionDAO {
                 }
             }
         }
+        return transaction;
     }
 
     @Override
@@ -155,4 +184,5 @@ public class TransactionDAOImpl implements TransactionDAO {
             }
         }
     }
+
 }

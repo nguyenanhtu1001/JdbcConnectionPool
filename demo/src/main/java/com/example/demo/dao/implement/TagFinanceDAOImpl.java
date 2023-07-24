@@ -13,20 +13,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class TagFinanceDAOImpl implements TagFinanceDAO {
-    public static final String ADD_TAG = "INSERT INTO Tag_Finances(name,description) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT id, name, description FROM Tag_Finances";
-    public static final String DELETE_TRAN = "DELETE FROM Tag_Finances WHERE id =?";
-    public static String UPDATE_TAG = "UPDATE Tag_Finances SET name =?, description =? WHERE id =?";
-    public static final String GET_TAG = "SELECT id, name, description FROM Tag_Finances WHERE id =?";
+    public static final String ADD_TAG = "INSERT INTO Tag_Finance (name, description) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT id, name, description FROM Tag_Finance";
+    public static final String DELETE_TAG = "DELETE FROM Tag_Finance WHERE id =?";
+    public static final String UPDATE_TAG = "UPDATE Tag_Finance SET name =?, description =? WHERE id =?";
+    public static final String GET_TAG = "SELECT id, name, description FROM Tag_Finance WHERE id =?";
 
     @Override
-    public void createTagFinance(String name, String description) throws SQLException {
+    public TagFinance createTagFinance(TagFinance tagFinance) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(ADD_TAG);
-            pstmt.setString(1, name);
-            pstmt.setString(2, description);
+            pstmt.setString(1, tagFinance.getName());
+            pstmt.setString(2, tagFinance.getDescription());
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
@@ -40,22 +40,25 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
             e.printStackTrace();
         } finally {
             if (Objects.nonNull(conn)) {
-                conn.close();
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                }
             }
         }
+        return tagFinance;
     }
-
-    @Override
-    public void updateTagFinance(String name, String description, int id) {
+@Override
+    public TagFinance updateTagFinance(TagFinance tagFinance, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
 
             PreparedStatement pstmt = conn.prepareStatement(UPDATE_TAG);
 
-            pstmt.setString(1, name);
-            pstmt.setString(2, description);
-            pstmt.setInt(3, id);
+            pstmt.setString(1, tagFinance.getName());
+            pstmt.setString(2, tagFinance.getDescription());
+            pstmt.setInt(3, tagFinance.getId());
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
@@ -76,8 +79,8 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
                 }
             }
         }
+        return tagFinance;
     }
-
 
     @Override
     public List<TagFinance> getAllTagFinance() {
@@ -88,11 +91,11 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
             PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                TagFinance tagFinance2 = new TagFinance(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"));
-                list.add(tagFinance2);
+                TagFinance tagFinance = new TagFinance();
+                tagFinance.setId(rs.getInt("id"));
+                tagFinance.setName(rs.getString("name"));
+                tagFinance.setDescription(rs.getString("description"));
+                list.add(tagFinance);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +116,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(DELETE_TRAN);
+            PreparedStatement pstmt = conn.prepareStatement(DELETE_TAG);
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
             conn.commit();
@@ -139,21 +142,20 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public TagFinance getTagFinanceById(int id) throws Exception {
+    public TagFinance getTagFinanceById(int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
             PreparedStatement pstmt = conn.prepareStatement(GET_TAG);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                TagFinance tagFinanceGet = new TagFinance(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("description"));
-                return tagFinanceGet;
+            if (rs.next()) {
+                TagFinance tagFinance = new TagFinance();
+                tagFinance.setId(rs.getInt("id"));
+                tagFinance.setName(rs.getString("name"));
+                tagFinance.setDescription(rs.getString("description"));
+                return tagFinance;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

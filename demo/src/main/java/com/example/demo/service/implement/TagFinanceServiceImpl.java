@@ -8,6 +8,7 @@ import com.example.demo.entity.TagFinance;
 import com.example.demo.service.TagFinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,32 +20,48 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     public static List<TagFinanceResponse> tagFinanceDTO = new ArrayList<>();
 
     @Override
-    public List<TagFinanceResponse> getAllTagFinance() throws Exception {
+    public List<TagFinanceResponse> getAllTagFinance() {
         List<TagFinance> tagFinanceList = tagFinanceDAO.getAllTagFinance();
-        for (int i = 0; i < tagFinanceList.size(); i++) {
-            TagFinanceResponse tagFinanceResponseDTO = new TagFinanceResponse(tagFinanceList.get(i));
-            tagFinanceDTO.add(tagFinanceResponseDTO);
+
+        for (TagFinance tagFinance : tagFinanceList) {
+            String name = tagFinance.getName();
+            String description = tagFinance.getDescription();
+            TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(name, description);
+            tagFinanceDTO.add(tagFinanceResponse);
         }
         return tagFinanceDTO;
     }
 
+
     @Override
-    public TagFinance getTagFinanceById(int id) throws Exception {
-        return tagFinanceDAO.getTagFinanceById(id);
+    public TagFinanceResponse getTagFinanceById(int id) {
+        TagFinance tagFinance = tagFinanceDAO.getTagFinanceById(id);
+        String name = tagFinance.getName();
+        String description = tagFinance.getDescription();
+        TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(name, description);
+        return tagFinanceResponse;
     }
 
     @Override
-    public void createTag(TagfinanceRequest tagfinanceRequestDTO) throws Exception {
-        tagFinanceDAO.createTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription());
+    public TagFinanceResponse createTagFinance(TagfinanceRequest tagfinanceRequest) {
+        TagFinance tagFinance = new TagFinance(tagfinanceRequest.getName(), tagfinanceRequest.getDescription());
+        TagFinanceResponse response = new TagFinanceResponse(tagFinanceDAO.createTagFinance(tagFinance));
+        return response;
+    }
+
+
+    @Override
+    public TagFinanceResponse updateTagFinance(TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int Id) {
+        TagFinance tagfinanceUpdate = new TagFinance(
+                tagfinanceRequest.getName(),
+                tagfinanceRequest.getDescription());
+        tagFinanceDAO.updateTagFinance(tagfinanceUpdate, Id);
+        TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(tagfinanceUpdate.getName(), tagfinanceUpdate.getDescription());
+        return tagFinanceResponse;
     }
 
     @Override
-    public void updateTag(TagfinanceRequest tagfinanceRequestDTO, int Id) throws Exception {
-        tagFinanceDAO.updateTagFinance(tagfinanceRequestDTO.getName(), tagfinanceRequestDTO.getDescription(), Id);
-    }
-
-    @Override
-    public void deleteTag(int Id) throws Exception {
+    public void deleteTagFinance(int Id) {
         tagFinanceDAO.deleteTagFinance(Id);
     }
 

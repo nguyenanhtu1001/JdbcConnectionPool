@@ -2,18 +2,19 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.TagFinance;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface TagFinanceDAO {
 
-    void updateTagFinance(String name, String description, int id) throws Exception;
+    TagFinance updateTagFinance(TagFinance tagFinance, int id);
 
-    List<TagFinance> getAllTagFinance() throws Exception;
+
+    List<TagFinance> getAllTagFinance();
 
     void deleteTagFinance(int id);
 
-    TagFinance getTagFinanceById(int id) throws Exception;
+    TagFinance getTagFinanceById(int id);
 
-    void createTagFinance(String name, String description) throws SQLException;
+    TagFinance createTagFinance(TagFinance tagFinance);
+
 }
