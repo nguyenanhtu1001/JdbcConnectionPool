@@ -8,7 +8,6 @@ public interface TagFinanceDAO {
 
     TagFinance updateTagFinance(TagFinance tagFinance, int id);
 
-
     List<TagFinance> getAllTagFinance();
 
     void deleteTagFinance(int id);

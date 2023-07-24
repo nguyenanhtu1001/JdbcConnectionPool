@@ -4,7 +4,6 @@ import lombok.Getter;
 import com.example.demo.entity.TagFinance;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.http.HttpStatusCode;
 
 @Getter
 @Setter

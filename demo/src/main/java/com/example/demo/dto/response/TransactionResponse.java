@@ -18,16 +18,17 @@ public class TransactionResponse {
     private double amount;
     private int id;
     private List<Integer> tagId;
+    private List<TagFinanceResponse> tagFinanceResponses;
 
 
-
-    public TransactionResponse(TransactionRequest transaction) {
+    public TransactionResponse(TransactionRequest transaction, List<Integer> tagId) {
         this.title = transaction.getTitle();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();
         this.tagId = transaction.getTagId();
     }
-    public TransactionResponse(Transaction transaction){
+
+    public TransactionResponse(Transaction transaction) {
         this.title = transaction.getTitle();
         this.description = transaction.getDescription();
         this.amount = transaction.getAmount();
@@ -40,10 +41,13 @@ public class TransactionResponse {
         this.amount = amount;
         this.tagId = tagId;
     }
-    public TransactionResponse(String title, String description, double amount, List<Integer> tagId) {
+
+    public TransactionResponse(int id, String title, String description, double amount, List<Integer> tagId, List<TagFinanceResponse> tagFinanceResponses) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.amount = amount;
         this.tagId = tagId;
+        this.tagFinanceResponses = tagFinanceResponses;
     }
 }

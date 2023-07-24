@@ -21,24 +21,25 @@ public class TagFinanceController {
     @PostMapping("/create")
 
     public ResponseEntity<TagFinanceResponse> CreateTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest) {
-        return new ResponseEntity<>(tagFinanceService.createTagFinance(tagfinanceRequest),HttpStatus.OK);
+        return new ResponseEntity<>(tagFinanceService.createTagFinance(tagfinanceRequest), HttpStatus.OK);
     }
 
     @GetMapping("/get")
-    public List<TagFinanceResponse> getTagFinance() {
+    public ResponseEntity<List<TagFinanceResponse>> getTagFinance() {
         List<TagFinanceResponse> listResponse = tagFinanceService.getAllTagFinance();
-        return listResponse;
+        return new ResponseEntity<>(listResponse, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TagFinanceResponse>
     update(@RequestBody TagfinanceRequest tagfinance, @PathVariable(name = "id") int Id) {
-        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinance,Id),HttpStatus.OK);
+        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinance, Id), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteTagFinance(@PathVariable(name = "id") int tagId) {
+    public ResponseEntity<Void> deleteTagFinance(@PathVariable(name = "id") int tagId) {
         tagFinanceService.deleteTagFinance(tagId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

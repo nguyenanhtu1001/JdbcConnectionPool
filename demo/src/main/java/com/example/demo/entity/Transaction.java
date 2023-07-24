@@ -31,13 +31,4 @@ public class Transaction implements Serializable {
         this.description = description;
         this.amount = amount;
     }
-    public  Transaction(String title, String description, double amount, int id) {
-        this.title = title;
-        this.description = description;
-        this.amount = amount;
-        this.id = id;
-    }
-
-
-
 }

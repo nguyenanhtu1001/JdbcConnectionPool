@@ -46,7 +46,7 @@ public class TransactionDAOImpl implements TransactionDAO {
                     int tagId = rsTags.getInt("tag_id");
                     tagIds.add(tagId);
                 }
-                TransactionResponse response = new TransactionResponse(id, title, description, amount,tagIds);
+                TransactionResponse response = new TransactionResponse(id, title, description, amount, tagIds);
                 list.add(response);
             }
 
@@ -72,18 +72,18 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public TransactionRequest createTransaction(TransactionRequest transactionRequest) {
+    public Transaction createTransaction(Transaction transaction, List<Integer> tagIds) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
 
-            PreparedStatement insertTransactionStmt = conn.prepareStatement(INSERT_TRAN, Statement.RETURN_GENERATED_KEYS);
-            insertTransactionStmt.setString(1, transactionRequest.getTitle());
-            insertTransactionStmt.setString(2, transactionRequest.getDescription());
-            insertTransactionStmt.setDouble(3, transactionRequest.getAmount());
-            insertTransactionStmt.executeUpdate();
+            PreparedStatement insert = conn.prepareStatement(INSERT_TRAN, Statement.RETURN_GENERATED_KEYS);
+            insert.setString(1, transaction.getTitle());
+            insert.setString(2, transaction.getDescription());
+            insert.setDouble(3, transaction.getAmount());
+            insert.executeUpdate();
 
-            ResultSet generatedKeys = insertTransactionStmt.getGeneratedKeys();
+            ResultSet generatedKeys = insert.getGeneratedKeys();
             int transactionId;
             if (generatedKeys.next()) {
                 transactionId = generatedKeys.getInt(1);
@@ -91,11 +91,11 @@ public class TransactionDAOImpl implements TransactionDAO {
                 throw new SQLException("Failed to retrieve generated transaction ID");
             }
 
-            for (int tagId : transactionRequest.getTagId()) {
-                PreparedStatement createTransactionTagStmt = conn.prepareStatement(CREATE_TRANSACTION_TAG);
-                createTransactionTagStmt.setInt(1, tagId);
-                createTransactionTagStmt.setInt(2, transactionId);
-                createTransactionTagStmt.executeUpdate();
+            for (int tagId : tagIds) {
+                PreparedStatement create = conn.prepareStatement(CREATE_TRANSACTION_TAG);
+                create.setInt(1, tagId);
+                create.setInt(2, transactionId);
+                create.executeUpdate();
             }
 
             conn.commit();
@@ -118,7 +118,7 @@ public class TransactionDAOImpl implements TransactionDAO {
                 }
             }
         }
-        return transactionRequest;
+        return transaction;
     }
 
     @Override

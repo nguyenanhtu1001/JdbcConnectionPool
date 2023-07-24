@@ -9,7 +9,7 @@ import java.util.List;
 public interface TransactionDAO {
     List<TransactionResponse> getAllTransactions();
 
-    TransactionRequest createTransaction(TransactionRequest transaction);
+    Transaction createTransaction(Transaction transaction, List<Integer> tagIds);
 
     Transaction updateTransaction(Transaction transaction, int id);
 

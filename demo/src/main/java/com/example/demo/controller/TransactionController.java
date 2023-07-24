@@ -19,9 +19,9 @@ public class TransactionController {
     }
 
     @GetMapping("/get")
-    public List<TransactionResponse> getAll() {
+    public ResponseEntity<List<TransactionResponse>> getAll() {
         List<TransactionResponse> list = transactionService.getTransaction();
-        return list;
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -30,8 +30,9 @@ public class TransactionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void delete(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Void> delete(@PathVariable(name = "id") int id) {
         transactionService.deleteTransaction(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
