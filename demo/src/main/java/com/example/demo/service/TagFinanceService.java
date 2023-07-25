@@ -8,7 +8,7 @@ import java.util.List;
 public interface TagFinanceService {
     TagFinanceResponse createTagFinance(TagFinanceRequest tagFinanceRequest);
 
-    TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, int id);
+    TagFinanceResponse updateTagFinance(TagFinanceRequest tagFinanceRequest, int id);
 
     void deleteTagFinance(int id);
 

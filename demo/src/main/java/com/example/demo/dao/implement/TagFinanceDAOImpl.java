@@ -16,7 +16,6 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     public static final String ADD_TAG = "INSERT INTO tag_finance (name, description) VALUES (?, ?)";
     public static final String SELECT_ALL = "SELECT id, name, description FROM tag_finance";
     public static final String DELETE_TAG = "DELETE FROM tag_finance WHERE id =?";
-    public static final String DELETE_TAG_FROM_TRANSACTION = "DELETE FROM transaction_tag_finance WHERE transaction_id = ? AND tag_id = ?";
     public static final String UPDATE_TAG = "UPDATE tag_finance SET name =?, description =? WHERE id =?";
     public static final String GET_TAG = "SELECT id, name, description FROM tag_finance WHERE id =?";
 
@@ -60,7 +59,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
 
             pstmt.setString(1, tagFinance.getName());
             pstmt.setString(2, tagFinance.getDescription());
-            pstmt.setInt(3, tagFinance.getId());
+            pstmt.setInt(3, id);
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {

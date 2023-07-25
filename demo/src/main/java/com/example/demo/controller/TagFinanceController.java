@@ -32,8 +32,8 @@ public class TagFinanceController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TagFinanceResponse>
-    updateTagFinance(@RequestBody TagFinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
-        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinanceRequest, id), HttpStatus.OK);
+    updateTagFinance(@RequestBody TagFinanceRequest tagFinanceRequest, @PathVariable(name = "id") int id) {
+        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagFinanceRequest, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
