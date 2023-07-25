@@ -11,12 +11,12 @@ import java.util.List;
 
 
 public class TransactionDAOImpl implements TransactionDAO {
-    public static final String CREATE_TRANSACTION_TAG = "INSERT INTO Transaction_Tag_Finance (tag_id, transaction_id) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT * FROM Transaction inner join Transaction_Tag_Finance on Transaction.id=Transaction_Tag_Finance.transaction_id";
-    public static final String INSERT_TRAN = "INSERT INTO Transaction (title, description,amount) VALUES (?,?,?)";
-    public static final String UPDATE_TRANSACTION = "UPDATE Transaction SET title=?, description =?,amount=? WHERE id =?";
-    public static final String DELETE_TRAN = "DELETE FROM Transaction WHERE id =?";
-    private static final String SELECT_TAGS_BY_TRANSACTION_ID = "SELECT tag_id FROM Transaction_Tag_Finance WHERE transaction_id = ?";
+    public static final String CREATE_TRANSACTION_TAG = "INSERT INTO transaction_tag_finance (tag_id, transaction_id) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT * FROM transactions inner join transaction_tag_finance on transactions.id=transaction_tag_finance.transaction_id";
+    public static final String INSERT_TRAN = "INSERT INTO transactions (title, description,amount) VALUES (?,?,?)";
+    public static final String UPDATE_TRANSACTION = "UPDATE transactions SET title=?, description =?,amount=? WHERE id =?";
+    public static final String DELETE_TRAN = "DELETE FROM transactions WHERE id =?";
+    private static final String SELECT_TAGS_BY_TRANSACTION_ID = "SELECT tag_id FROM transaction_tag_finance WHERE transaction_id = ?";
 
 
     @Override

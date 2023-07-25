@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class TagFinanceDAOImpl implements TagFinanceDAO {
-    public static final String ADD_TAG = "INSERT INTO Tag_Finance (name, description) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT id, name, description FROM Tag_Finance";
-    public static final String DELETE_TAG = "DELETE FROM Tag_Finance WHERE id =?";
-    public static final String UPDATE_TAG = "UPDATE Tag_Finance SET name =?, description =? WHERE id =?";
-    public static final String GET_TAG = "SELECT id, name, description FROM Tag_Finance WHERE id =?";
+    public static final String ADD_TAG = "INSERT INTO tag_finance (name, description) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT id, name, description FROM tag_finance";
+    public static final String DELETE_TAG = "DELETE FROM tag_finance WHERE id =?";
+    public static final String UPDATE_TAG = "UPDATE tag_finance SET name =?, description =? WHERE id =?";
+    public static final String GET_TAG = "SELECT id, name, description FROM tag_finance WHERE id =?";
 
     @Override
     public TagFinance createTagFinance(TagFinance tagFinance) {
