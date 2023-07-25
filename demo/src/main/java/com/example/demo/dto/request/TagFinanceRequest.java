@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TagfinanceRequest {
+public class TagFinanceRequest {
     private String name;
     private String description;
 
-    public TagfinanceRequest(String name, String description) {
+    public TagFinanceRequest(String name, String description) {
         this.name = name;
         this.description = description;
     }

@@ -5,14 +5,16 @@ import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TransactionDAO;
 import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.Transaction;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class TransactionDAOImpl implements TransactionDAO {
-    public static final String CREATE_TRANSACTION_TAG = "INSERT INTO transaction_tag_finance (tag_id, transaction_id) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT * FROM transactions inner join transaction_tag_finance on transactions.id=transaction_tag_finance.transaction_id";
+    public static final String CREATE_TRANSACTION_TAG = "INSERT INTO transaction_tag_finance (transaction_id, tag_id) VALUES (?, ?)";
+    public static final String SELECT_ALL = "SELECT * FROM transactions INNER JOIN transaction_tag_finance ON transactions.id = transaction_tag_finance.transaction_id";
+
     public static final String INSERT_TRAN = "INSERT INTO transactions (title, description,amount) VALUES (?,?,?)";
     public static final String UPDATE_TRANSACTION = "UPDATE transactions SET title=?, description =?,amount=? WHERE id =?";
     public static final String DELETE_TRAN = "DELETE FROM transactions WHERE id =?";
@@ -89,8 +91,8 @@ public class TransactionDAOImpl implements TransactionDAO {
 
             for (int tagId : tagIds) {
                 PreparedStatement create = conn.prepareStatement(CREATE_TRANSACTION_TAG);
-                create.setInt(1, tagId);
-                create.setInt(2, transactionId);
+                create.setInt(1, transactionId);
+                create.setInt(2, tagId);
                 create.executeUpdate();
             }
 

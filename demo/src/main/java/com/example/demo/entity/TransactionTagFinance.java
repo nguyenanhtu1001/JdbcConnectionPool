@@ -15,8 +15,6 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Table(name = "transaction_tag_finance")
 public class TransactionTagFinance {
-    @Id
-    private int transactionId;
-    @Id
-    private int tagId;
+    @EmbeddedId
+    private TransactionTagFinanceId id;
 }

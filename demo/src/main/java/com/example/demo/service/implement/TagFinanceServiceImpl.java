@@ -2,7 +2,7 @@ package com.example.demo.service.implement;
 
 import com.example.demo.dao.TagFinanceDAO;
 import com.example.demo.dao.implement.TagFinanceDAOImpl;
-import com.example.demo.dto.request.TagfinanceRequest;
+import com.example.demo.dto.request.TagFinanceRequest;
 import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.entity.TagFinance;
 import com.example.demo.service.TagFinanceService;
@@ -46,7 +46,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public TagFinanceResponse createTagFinance(TagfinanceRequest tagfinanceRequest) {
+    public TagFinanceResponse createTagFinance(TagFinanceRequest tagfinanceRequest) {
         TagFinance tagFinance = new TagFinance(
                 tagfinanceRequest.getName(),
                 tagfinanceRequest.getDescription());
@@ -57,7 +57,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
 
 
     @Override
-    public TagFinanceResponse updateTagFinance(TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
+    public TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
         TagFinance tagfinanceUpdate = new TagFinance(
                 tagfinanceRequest.getName(),
                 tagfinanceRequest.getDescription());
@@ -69,7 +69,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public void deleteTagFinance(int id) {
-        tagFinanceDAO.deleteTagFinance(id);
+    public void deleteTagFinance(int transactionId, int tagId) {
+        tagFinanceDAO.deleteTagFinance(transactionId, tagId);
     }
 }

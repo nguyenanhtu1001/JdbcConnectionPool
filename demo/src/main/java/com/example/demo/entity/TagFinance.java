@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
-import com.example.demo.dto.request.TagfinanceRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
-
 import java.io.Serializable;
 
 @Entity
@@ -12,7 +10,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @Table(name = "tag_finances")
-public class TagFinance implements Serializable {
+public class TagFinance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

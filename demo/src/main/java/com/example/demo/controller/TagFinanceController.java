@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.request.TagfinanceRequest;
+import com.example.demo.dto.request.TagFinanceRequest;
 import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.service.TagFinanceService;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class TagFinanceController {
 
     @PostMapping("/create")
 
-    public ResponseEntity<TagFinanceResponse> createTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest) {
+    public ResponseEntity<TagFinanceResponse> createTagFinance(@RequestBody TagFinanceRequest tagfinanceRequest) {
         return new ResponseEntity<>(tagFinanceService.createTagFinance(tagfinanceRequest), HttpStatus.OK);
     }
 
@@ -32,14 +32,17 @@ public class TagFinanceController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TagFinanceResponse>
-    updateTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
+    updateTagFinance(@RequestBody TagFinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
         return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinanceRequest, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteTagFinance(@PathVariable(name = "id") int tagId) {
-        tagFinanceService.deleteTagFinance(tagId);
+    @DeleteMapping("/delete/{transactionId}/{tagId}")
+    public ResponseEntity<Void> deleteTagFinance
+            (@PathVariable(name = "transactionId") int transactionId,
+             @PathVariable(name = "tagId") int tagId) {
+        tagFinanceService.deleteTagFinance(transactionId, tagId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 
 }
