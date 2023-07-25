@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "Transactions")
+@Table(name = "transactions")
 public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Transaction implements Serializable {
     @Column(name = "amount")
     private double amount;
 
-    public  Transaction(String title, String description, double amount) {
+    public Transaction(String title, String description, double amount) {
         this.title = title;
         this.description = description;
         this.amount = amount;

@@ -17,21 +17,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TagFinanceServiceImpl implements TagFinanceService {
     private final TagFinanceDAO tagFinanceDAO = new TagFinanceDAOImpl();
-    public static List<TagFinanceResponse> tagFinanceDTO = new ArrayList<>();
 
     @Override
     public List<TagFinanceResponse> getAllTagFinance() {
-        List<TagFinance> tagFinanceList = tagFinanceDAO.getAllTagFinance();
 
-        for (TagFinance tagFinance : tagFinanceList) {
-            String name = tagFinance.getName();
-            String description = tagFinance.getDescription();
-            TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(name, description);
-            tagFinanceDTO.add(tagFinanceResponse);
+        List<TagFinance> tagFinances = tagFinanceDAO.getAllTagFinance();
+        List<TagFinanceResponse> tagFinancesResponse = new ArrayList<>();
+        String name;
+        String description;
+        TagFinanceResponse tagFinanceResponse;
+
+        for (TagFinance tagFinance : tagFinances) {
+            name = tagFinance.getName();
+            description = tagFinance.getDescription();
+            tagFinanceResponse = new TagFinanceResponse(name, description);
+            tagFinancesResponse.add(tagFinanceResponse);
         }
-        return tagFinanceDTO;
+        return tagFinancesResponse;
     }
-
 
     @Override
     public TagFinanceResponse getTagFinanceById(int id) {
@@ -44,26 +47,29 @@ public class TagFinanceServiceImpl implements TagFinanceService {
 
     @Override
     public TagFinanceResponse createTagFinance(TagfinanceRequest tagfinanceRequest) {
-        TagFinance tagFinance = new TagFinance(tagfinanceRequest.getName(), tagfinanceRequest.getDescription());
-        TagFinanceResponse response = new TagFinanceResponse(tagFinanceDAO.createTagFinance(tagFinance));
-        return response;
+        TagFinance tagFinance = new TagFinance(
+                tagfinanceRequest.getName(),
+                tagfinanceRequest.getDescription());
+        TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(
+                tagFinanceDAO.createTagFinance(tagFinance));
+        return tagFinanceResponse;
     }
 
 
     @Override
-    public TagFinanceResponse updateTagFinance(TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int Id) {
+    public TagFinanceResponse updateTagFinance(TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
         TagFinance tagfinanceUpdate = new TagFinance(
                 tagfinanceRequest.getName(),
                 tagfinanceRequest.getDescription());
-        tagFinanceDAO.updateTagFinance(tagfinanceUpdate, Id);
-        TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(tagfinanceUpdate.getName(), tagfinanceUpdate.getDescription());
+        tagFinanceDAO.updateTagFinance(tagfinanceUpdate, id);
+        TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(
+                tagfinanceUpdate.getName(),
+                tagfinanceUpdate.getDescription());
         return tagFinanceResponse;
     }
 
     @Override
-    public void deleteTagFinance(int Id) {
-        tagFinanceDAO.deleteTagFinance(Id);
+    public void deleteTagFinance(int id) {
+        tagFinanceDAO.deleteTagFinance(id);
     }
-
-
 }

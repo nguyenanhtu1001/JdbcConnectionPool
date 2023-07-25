@@ -19,25 +19,26 @@ public class TransactionController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<TransactionResponse>> getAll() {
-        List<TransactionResponse> list = transactionService.getTransaction();
-        return new ResponseEntity<>(list, HttpStatus.OK);
+    public ResponseEntity<List<TransactionResponse>> getAllTransaction() {
+        List<TransactionResponse> transactionResponses = transactionService.getTransaction();
+        return new ResponseEntity<>(transactionResponses, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TransactionResponse> create(@RequestBody TransactionRequest request) {
-        return new ResponseEntity<>(transactionService.createTransaction(request), HttpStatus.OK);
+    public ResponseEntity<TransactionResponse>
+    createTransaction(@RequestBody TransactionRequest transactionRequest) {
+        return new ResponseEntity<>(transactionService.createTransaction(transactionRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Void> deleteTransaction(@PathVariable(name = "id") int id) {
         transactionService.deleteTransaction(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TransactionResponse>
-    update(@RequestBody TransactionRequest transaction, @PathVariable(name = "id") int id) {
-        return new ResponseEntity<>(transactionService.updateTransaction(transaction, id), HttpStatus.OK);
+    updateTransaction(@RequestBody TransactionRequest transactionRequest, @PathVariable(name = "id") int id) {
+        return new ResponseEntity<>(transactionService.updateTransaction(transactionRequest, id), HttpStatus.OK);
     }
 }

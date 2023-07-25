@@ -20,20 +20,20 @@ public class TagFinanceController {
 
     @PostMapping("/create")
 
-    public ResponseEntity<TagFinanceResponse> CreateTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest) {
+    public ResponseEntity<TagFinanceResponse> createTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest) {
         return new ResponseEntity<>(tagFinanceService.createTagFinance(tagfinanceRequest), HttpStatus.OK);
     }
 
     @GetMapping("/get")
     public ResponseEntity<List<TagFinanceResponse>> getTagFinance() {
-        List<TagFinanceResponse> listResponse = tagFinanceService.getAllTagFinance();
-        return new ResponseEntity<>(listResponse, HttpStatus.OK);
+        List<TagFinanceResponse> tagFinanceResponses = tagFinanceService.getAllTagFinance();
+        return new ResponseEntity<>(tagFinanceResponses, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<TagFinanceResponse>
-    update(@RequestBody TagfinanceRequest tagfinance, @PathVariable(name = "id") int Id) {
-        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinance, Id), HttpStatus.OK);
+    updateTagFinance(@RequestBody TagfinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
+        return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinanceRequest, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

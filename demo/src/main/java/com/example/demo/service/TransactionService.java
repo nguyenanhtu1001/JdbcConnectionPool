@@ -8,7 +8,7 @@ import java.util.List;
 public interface TransactionService {
     TransactionResponse createTransaction(TransactionRequest transactionrequest);
 
-    TransactionResponse updateTransaction(TransactionRequest transactionRequestDTO, int id);
+    TransactionResponse updateTransaction(TransactionRequest transactionRequest, int id);
 
     void deleteTransaction(int id);
 

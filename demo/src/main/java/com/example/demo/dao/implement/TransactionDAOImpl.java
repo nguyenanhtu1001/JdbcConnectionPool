@@ -3,10 +3,8 @@ package com.example.demo.dao.implement;
 
 import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TransactionDAO;
-import com.example.demo.dto.request.TransactionRequest;
 import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.Transaction;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +16,6 @@ public class TransactionDAOImpl implements TransactionDAO {
     public static final String INSERT_TRAN = "INSERT INTO Transaction (title, description,amount) VALUES (?,?,?)";
     public static final String UPDATE_TRANSACTION = "UPDATE Transaction SET title=?, description =?,amount=? WHERE id =?";
     public static final String DELETE_TRAN = "DELETE FROM Transaction WHERE id =?";
-    private static final String SELECT_ALL_TRANSACTIONS = "SELECT id, title, create_at, amount, description FROM Transaction";
-
     private static final String SELECT_TAGS_BY_TRANSACTION_ID = "SELECT tag_id FROM Transaction_Tag_Finance WHERE transaction_id = ?";
 
 
@@ -173,7 +169,6 @@ public class TransactionDAOImpl implements TransactionDAO {
                 }
             }
             throw new RuntimeException("Failed to delete");
-
         } finally {
             if (conn != null) {
                 try {

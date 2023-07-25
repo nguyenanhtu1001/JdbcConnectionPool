@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "Tag_Finances")
+@Table(name = "tag_finances")
 public class TagFinance implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +22,6 @@ public class TagFinance implements Serializable {
     private String description;
 
     public TagFinance(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public TagFinance(TagfinanceRequest tagfinanceRequest) {
-        this.name = tagfinanceRequest.getName();
-        this.description = tagfinanceRequest.getDescription();
-    }
-
-    public TagFinance(int id, String name, String description) {
-        this.id = id;
         this.name = name;
         this.description = description;
     }

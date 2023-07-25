@@ -24,7 +24,6 @@ public class DataSource {
         ds = new HikariDataSource(config);
     }
 
-
     private DataSource() {
     }
 
