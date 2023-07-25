@@ -10,7 +10,7 @@ public interface TagFinanceDAO {
 
     List<TagFinance> getAllTagFinance();
 
-    void deleteTagFinance(int transactionId,int tagId);
+    void deleteTagFinance(int id);
 
     TagFinance getTagFinanceById(int id);
 

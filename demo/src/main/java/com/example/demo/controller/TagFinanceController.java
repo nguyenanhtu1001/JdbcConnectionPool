@@ -36,11 +36,9 @@ public class TagFinanceController {
         return new ResponseEntity<>(tagFinanceService.updateTagFinance(tagfinanceRequest, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{transactionId}/{tagId}")
-    public ResponseEntity<Void> deleteTagFinance
-            (@PathVariable(name = "transactionId") int transactionId,
-             @PathVariable(name = "tagId") int tagId) {
-        tagFinanceService.deleteTagFinance(transactionId, tagId);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteTagFinance(@PathVariable(name = "id") int id){
+        tagFinanceService.deleteTagFinance(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

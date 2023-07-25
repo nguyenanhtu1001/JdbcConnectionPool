@@ -113,43 +113,13 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
         return list;
     }
 
-    //    @Override
-//    public void deleteTagFinance(int id) {
-//        Connection conn = null;
-//        try {
-//            conn = DataSource.getInstance().getConnection();
-//            PreparedStatement pstmt = conn.prepareStatement(DELETE_TAG);
-//            pstmt.setInt(1, id);
-//            pstmt.executeUpdate();
-//            conn.commit();
-//        } catch (SQLException e) {
-//            if (conn != null) {
-//                try {
-//                    conn.rollback();
-//                } catch (SQLException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//            }
-//            throw new RuntimeException("Failed to delete");
-//
-//        } finally {
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException e) {
-//                    System.out.println("Error closing");
-//                }
-//            }
-//        }
-//    }
-    @Override
-    public void deleteTagFinance(int transactionId, int tagId) {
+        @Override
+    public void deleteTagFinance(int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(DELETE_TAG_FROM_TRANSACTION);
-            pstmt.setInt(1, transactionId);
-            pstmt.setInt(2, tagId);
+            PreparedStatement pstmt = conn.prepareStatement(DELETE_TAG);
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             conn.commit();
         } catch (SQLException e) {
@@ -161,6 +131,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
                 }
             }
             throw new RuntimeException("Failed to delete");
+
         } finally {
             if (conn != null) {
                 try {
@@ -171,6 +142,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
             }
         }
     }
+
 
     @Override
     public TagFinance getTagFinanceById(int id) {

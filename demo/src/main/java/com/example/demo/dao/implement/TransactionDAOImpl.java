@@ -14,7 +14,6 @@ import java.util.List;
 public class TransactionDAOImpl implements TransactionDAO {
     public static final String CREATE_TRANSACTION_TAG = "INSERT INTO transaction_tag_finance (transaction_id, tag_id) VALUES (?, ?)";
     public static final String SELECT_ALL = "SELECT * FROM transactions INNER JOIN transaction_tag_finance ON transactions.id = transaction_tag_finance.transaction_id";
-
     public static final String INSERT_TRAN = "INSERT INTO transactions (title, description,amount) VALUES (?,?,?)";
     public static final String UPDATE_TRANSACTION = "UPDATE transactions SET title=?, description =?,amount=? WHERE id =?";
     public static final String DELETE_TRAN = "DELETE FROM transactions WHERE id =?";

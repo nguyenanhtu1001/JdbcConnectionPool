@@ -57,7 +57,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
 
 
     @Override
-    public TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, @PathVariable(name = "id") int id) {
+    public TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, int id) {
         TagFinance tagfinanceUpdate = new TagFinance(
                 tagfinanceRequest.getName(),
                 tagfinanceRequest.getDescription());
@@ -69,7 +69,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public void deleteTagFinance(int transactionId, int tagId) {
-        tagFinanceDAO.deleteTagFinance(transactionId, tagId);
+    public void deleteTagFinance(int id ){
+        tagFinanceDAO.deleteTagFinance( id);
     }
 }

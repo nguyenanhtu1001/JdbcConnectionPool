@@ -10,7 +10,7 @@ public interface TagFinanceService {
 
     TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, int id);
 
-    void deleteTagFinance(int transactionId, int tagId);
+    void deleteTagFinance(int id);
 
     List<TagFinanceResponse> getAllTagFinance();
 
