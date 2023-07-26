@@ -11,7 +11,6 @@ public class ResponseGeneral<T> {
 
     private int statusCode;
 
-
     private T data;
 
     public ResponseGeneral(String message, T data) {
