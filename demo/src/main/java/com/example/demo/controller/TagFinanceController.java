@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
+import com.example.demo.constant.MessageResponse;
 import com.example.demo.dto.request.TagFinanceRequest;
+import com.example.demo.dto.response.BaseResponse;
 import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.service.TagFinanceService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -20,25 +20,25 @@ public class TagFinanceController {
 
     @PostMapping("/create")
 
-    public ResponseEntity<TagFinanceResponse> create(@RequestBody TagFinanceRequest tagfinanceRequest) {
-        return new ResponseEntity<>(tagFinanceService.create(tagfinanceRequest), HttpStatus.OK);
+    public BaseResponse<TagFinanceResponse> create(@RequestBody TagFinanceRequest tagfinanceRequest) {
+        return new BaseResponse<>(MessageResponse.CREATE_TAG_SUCCESS, tagFinanceService.create(tagfinanceRequest));
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<TagFinanceResponse>> getAll() {
+    public BaseResponse<List<TagFinanceResponse>> getAll() {
         List<TagFinanceResponse> tagFinanceResponses = tagFinanceService.getAll();
-        return new ResponseEntity<>(tagFinanceResponses, HttpStatus.OK);
+        return new BaseResponse<>(MessageResponse.GET_TAG_SUCCESS, tagFinanceResponses);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<TagFinanceResponse> update(@RequestBody TagFinanceRequest tagFinanceRequest, @PathVariable(name = "id") int id) {
-        return new ResponseEntity<>(tagFinanceService.update(tagFinanceRequest, id), HttpStatus.OK);
+    public BaseResponse<TagFinanceResponse> update(@RequestBody TagFinanceRequest tagFinanceRequest, @PathVariable(name = "id") int id) {
+        return new BaseResponse<>(MessageResponse.UPDATE_TAG_SUCCESS, tagFinanceService.update(tagFinanceRequest, id));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable(name = "id") int id) {
+    public BaseResponse<Void> delete(@PathVariable(name = "id") int id) {
         tagFinanceService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new BaseResponse<>(MessageResponse.DELETE_TAG_SUCCESS);
     }
 
 

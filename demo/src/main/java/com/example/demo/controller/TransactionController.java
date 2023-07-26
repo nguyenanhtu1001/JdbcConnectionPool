@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.constant.MessageResponse;
 import com.example.demo.dto.request.TransactionRequest;
+import com.example.demo.dto.response.BaseResponse;
 import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.service.TransactionService;
 import org.springframework.http.HttpStatus;
@@ -19,24 +21,24 @@ public class TransactionController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<TransactionResponse>> getAll() {
+    public BaseResponse<List<TransactionResponse>> getAll() {
         List<TransactionResponse> transactionResponses = transactionService.getAll();
-        return new ResponseEntity<>(transactionResponses, HttpStatus.OK);
+        return new BaseResponse<>(MessageResponse.GET_TRAN_SUCCESS, transactionResponses);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<TransactionResponse> create(@RequestBody TransactionRequest transactionRequest) {
-        return new ResponseEntity<>(transactionService.create(transactionRequest), HttpStatus.OK);
+    public BaseResponse<TransactionResponse> create(@RequestBody TransactionRequest transactionRequest) {
+        return new BaseResponse<>(MessageResponse.CREATE_TRAN_SUCCESS, transactionService.create(transactionRequest));
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> delete(@PathVariable(name = "id") int id) {
+    public BaseResponse<Void> delete(@PathVariable(name = "id") int id) {
         transactionService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new BaseResponse<>(MessageResponse.DELETE_TRAN_SUCCESS);
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<TransactionResponse> update(@RequestBody TransactionRequest transactionRequest, @PathVariable(name = "id") int id) {
-        return new ResponseEntity<>(transactionService.update(transactionRequest, id), HttpStatus.OK);
+    public BaseResponse<TransactionResponse> update(@RequestBody TransactionRequest transactionRequest, @PathVariable(name = "id") int id) {
+        return new BaseResponse<>(MessageResponse.UPDATE_TRAN_SUCCESS, transactionService.update(transactionRequest, id));
     }
 }

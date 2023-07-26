@@ -5,34 +5,23 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseResponse {
-    private int status;
+public class BaseResponse<T> {
 
     private String message;
 
-    private int code;
+    private int statusCode;
 
-    private Object data;
 
-    public BaseResponse() {
-    }
+    private T data;
 
-    public BaseResponse(int status, String message, int code) {
-        this.status = status;
-        this.message = message;
-        this.code = code;
-    }
-
-    public BaseResponse(String message, Object data) {
-        this.status = 1;
-        this.code = 200;
+    public BaseResponse(String message, T data) {
+        this.statusCode = 200;
         this.message = message;
         this.data = data;
     }
 
     public BaseResponse(String message) {
-        this.status = 1;
-        this.code = 200;
+        this.statusCode = 200;
         this.message = message;
     }
 }
