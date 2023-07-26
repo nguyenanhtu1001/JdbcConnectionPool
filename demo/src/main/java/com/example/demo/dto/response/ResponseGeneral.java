@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseResponse<T> {
+public class ResponseGeneral<T> {
 
     private String message;
 
@@ -14,13 +14,13 @@ public class BaseResponse<T> {
 
     private T data;
 
-    public BaseResponse(String message, T data) {
+    public ResponseGeneral(String message, T data) {
         this.statusCode = 200;
         this.message = message;
         this.data = data;
     }
 
-    public BaseResponse(String message) {
+    public ResponseGeneral(String message) {
         this.statusCode = 200;
         this.message = message;
     }
