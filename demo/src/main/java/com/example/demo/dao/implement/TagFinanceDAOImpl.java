@@ -20,7 +20,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     public static final String GET_TAG = "SELECT id, name, description FROM tag_finance WHERE id =?";
 
     @Override
-    public TagFinance createTagFinance(TagFinance tagFinance) {
+    public TagFinance create(TagFinance tagFinance) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -50,7 +50,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public TagFinance updateTagFinance(TagFinance tagFinance, int id) {
+    public TagFinance update(TagFinance tagFinance, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -84,7 +84,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
     }
 
     @Override
-    public List<TagFinance> getAllTagFinance() {
+    public List<TagFinance> getAll() {
         List<TagFinance> list = new ArrayList<>();
         Connection conn = null;
         try {
@@ -112,8 +112,8 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
         return list;
     }
 
-        @Override
-    public void deleteTagFinance(int id) {
+    @Override
+    public void delete(int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -144,7 +144,7 @@ public class TagFinanceDAOImpl implements TagFinanceDAO {
 
 
     @Override
-    public TagFinance getTagFinanceById(int id) {
+    public TagFinance getById(int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();

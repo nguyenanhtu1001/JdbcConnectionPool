@@ -11,6 +11,7 @@ import com.example.demo.entity.TagFinance;
 import com.example.demo.entity.Transaction;
 import com.example.demo.service.TransactionService;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +21,10 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionDAO transactionDAO = new TransactionDAOImpl();
 
     @Override
-    public TransactionResponse createTransaction(TransactionRequest transactionRequest) {
-        Transaction transaction = new Transaction(
-                transactionRequest.getTitle(),
-                transactionRequest.getDescription(),
-                transactionRequest.getAmount());
+    public TransactionResponse create(TransactionRequest transactionRequest) {
+        Transaction transaction = new Transaction(transactionRequest.getTitle(), transactionRequest.getDescription(), transactionRequest.getAmount());
         List<Integer> tagIds = transactionRequest.getTagId();
-        Transaction newTransaction = transactionDAO.createTransaction(transaction, tagIds);
+        Transaction newTransaction = transactionDAO.create(transaction, tagIds);
         TransactionResponse transactionResponse = new TransactionResponse(transactionRequest, tagIds);
 
         return transactionResponse;
@@ -34,25 +32,21 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    public TransactionResponse updateTransaction(TransactionRequest transactionRequest, int id) {
-        Transaction transactionUpdate = new Transaction(
-                transactionRequest.getTitle(),
-                transactionRequest.getDescription(),
-                transactionRequest.getAmount());
-        TransactionResponse transactionResponse = new TransactionResponse(
-                transactionDAO.updateTransaction(transactionUpdate, id));
+    public TransactionResponse update(TransactionRequest transactionRequest, int id) {
+        Transaction transactionUpdate = new Transaction(transactionRequest.getTitle(), transactionRequest.getDescription(), transactionRequest.getAmount());
+        TransactionResponse transactionResponse = new TransactionResponse(transactionDAO.update(transactionUpdate, id));
         return transactionResponse;
     }
 
     @Override
-    public void deleteTransaction(int id) {
-        transactionDAO.deleteTransaction(id);
+    public void delete(int id) {
+        transactionDAO.delete(id);
     }
 
     @Override
-    public List<TransactionResponse> getTransaction() {
+    public List<TransactionResponse> getAll() {
 
-        List<TransactionResponse> transactions = transactionDAO.getAllTransactions();
+        List<TransactionResponse> transactions = transactionDAO.getAll();
         List<TransactionResponse> transactionResponses = new ArrayList<>();
         List<Integer> tagIds;
         List<TagFinanceResponse> tagFinanceResponses;
@@ -64,18 +58,11 @@ public class TransactionServiceImpl implements TransactionService {
             tagFinanceResponses = new ArrayList<>();
 
             for (int tagId : tagIds) {
-                TagFinance tagFinance = tagFinanceDAO.getTagFinanceById(tagId);
+                TagFinance tagFinance = tagFinanceDAO.getById(tagId);
                 tagFinanceResponse = new TagFinanceResponse(tagFinance.getName(), tagFinance.getDescription());
                 tagFinanceResponses.add(tagFinanceResponse);
             }
-            transactionResponse = new TransactionResponse(
-                    transaction.getId(),
-                    transaction.getTitle(),
-                    transaction.getDescription(),
-                    transaction.getAmount(),
-                    transaction.getTagId(),
-                    tagFinanceResponses
-            );
+            transactionResponse = new TransactionResponse(transaction.getId(), transaction.getTitle(), transaction.getDescription(), transaction.getAmount(), transaction.getTagId(), tagFinanceResponses);
             transactionResponses.add(transactionResponse);
         }
         return transactionResponses;

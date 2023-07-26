@@ -19,9 +19,9 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     private final TagFinanceDAO tagFinanceDAO = new TagFinanceDAOImpl();
 
     @Override
-    public List<TagFinanceResponse> getAllTagFinance() {
+    public List<TagFinanceResponse> getAll() {
 
-        List<TagFinance> tagFinances = tagFinanceDAO.getAllTagFinance();
+        List<TagFinance> tagFinances = tagFinanceDAO.getAll();
         List<TagFinanceResponse> tagFinancesResponse = new ArrayList<>();
         String name;
         String description;
@@ -37,8 +37,8 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public TagFinanceResponse getTagFinanceById(int id) {
-        TagFinance tagFinance = tagFinanceDAO.getTagFinanceById(id);
+    public TagFinanceResponse getById(int id) {
+        TagFinance tagFinance = tagFinanceDAO.getById(id);
         String name = tagFinance.getName();
         String description = tagFinance.getDescription();
         TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(name, description);
@@ -46,22 +46,22 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public TagFinanceResponse createTagFinance(TagFinanceRequest tagFinanceRequest) {
+    public TagFinanceResponse create(TagFinanceRequest tagFinanceRequest) {
         TagFinance tagFinance = new TagFinance(
                 tagFinanceRequest.getName(),
                 tagFinanceRequest.getDescription());
         TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(
-                tagFinanceDAO.createTagFinance(tagFinance));
+                tagFinanceDAO.create(tagFinance));
         return tagFinanceResponse;
     }
 
 
     @Override
-    public TagFinanceResponse updateTagFinance(TagFinanceRequest tagfinanceRequest, int id) {
+    public TagFinanceResponse update(TagFinanceRequest tagfinanceRequest, int id) {
         TagFinance tagFinanceUpdate = new TagFinance(
                 tagfinanceRequest.getName(),
                 tagfinanceRequest.getDescription());
-        tagFinanceDAO.updateTagFinance(tagFinanceUpdate, id);
+        tagFinanceDAO.update(tagFinanceUpdate, id);
         TagFinanceResponse tagFinanceResponse = new TagFinanceResponse(
                 tagFinanceUpdate.getName(),
                 tagFinanceUpdate.getDescription());
@@ -69,7 +69,7 @@ public class TagFinanceServiceImpl implements TagFinanceService {
     }
 
     @Override
-    public void deleteTagFinance(int id) {
-        tagFinanceDAO.deleteTagFinance(id);
+    public void delete(int id) {
+        tagFinanceDAO.delete(id);
     }
 }

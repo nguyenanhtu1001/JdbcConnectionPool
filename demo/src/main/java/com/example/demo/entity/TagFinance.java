@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
-import java.io.Serializable;
 
 @Entity
 @Getter

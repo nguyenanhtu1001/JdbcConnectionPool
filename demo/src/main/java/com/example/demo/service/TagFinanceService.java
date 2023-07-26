@@ -6,14 +6,14 @@ import com.example.demo.dto.response.TagFinanceResponse;
 import java.util.List;
 
 public interface TagFinanceService {
-    TagFinanceResponse createTagFinance(TagFinanceRequest tagFinanceRequest);
+    TagFinanceResponse create(TagFinanceRequest tagFinanceRequest);
 
-    TagFinanceResponse updateTagFinance(TagFinanceRequest tagFinanceRequest, int id);
+    TagFinanceResponse update(TagFinanceRequest tagFinanceRequest, int id);
 
-    void deleteTagFinance(int id);
+    void delete(int id);
 
-    List<TagFinanceResponse> getAllTagFinance();
+    List<TagFinanceResponse> getAll();
 
-    TagFinanceResponse getTagFinanceById(int id);
+    TagFinanceResponse getById(int id);
 
 }

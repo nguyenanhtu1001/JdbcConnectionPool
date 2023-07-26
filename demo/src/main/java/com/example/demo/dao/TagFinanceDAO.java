@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface TagFinanceDAO {
 
-    TagFinance updateTagFinance(TagFinance tagFinance, int id);
+    TagFinance update(TagFinance tagFinance, int id);
 
-    List<TagFinance> getAllTagFinance();
+    List<TagFinance> getAll();
 
-    void deleteTagFinance(int id);
+    void delete(int id);
 
-    TagFinance getTagFinanceById(int id);
+    TagFinance getById(int id);
 
-    TagFinance createTagFinance(TagFinance tagFinance);
+    TagFinance create(TagFinance tagFinance);
 
 }

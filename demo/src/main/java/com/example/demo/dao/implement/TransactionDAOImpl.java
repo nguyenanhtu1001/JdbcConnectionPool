@@ -5,7 +5,6 @@ import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TransactionDAO;
 import com.example.demo.dto.response.TransactionResponse;
 import com.example.demo.entity.Transaction;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
 
     @Override
-    public List<TransactionResponse> getAllTransactions() {
+    public List<TransactionResponse> getAll() {
         Connection conn = null;
         List<TransactionResponse> list = new ArrayList<>();
         try {
@@ -69,7 +68,7 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public Transaction createTransaction(Transaction transaction, List<Integer> tagIds) {
+    public Transaction create(Transaction transaction, List<Integer> tagIds) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -119,7 +118,7 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public Transaction updateTransaction(Transaction transaction, int id) {
+    public Transaction update(Transaction transaction, int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();
@@ -152,7 +151,7 @@ public class TransactionDAOImpl implements TransactionDAO {
     }
 
     @Override
-    public void deleteTransaction(int id) {
+    public void delete(int id) {
         Connection conn = null;
         try {
             conn = DataSource.getInstance().getConnection();

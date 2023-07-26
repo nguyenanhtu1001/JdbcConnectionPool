@@ -6,11 +6,11 @@ import com.example.demo.dto.response.TransactionResponse;
 import java.util.List;
 
 public interface TransactionService {
-    TransactionResponse createTransaction(TransactionRequest transactionrequest);
+    TransactionResponse create(TransactionRequest transactionrequest);
 
-    TransactionResponse updateTransaction(TransactionRequest transactionRequest, int id);
+    TransactionResponse update(TransactionRequest transactionRequest, int id);
 
-    void deleteTransaction(int id);
+    void delete(int id);
 
-    List<TransactionResponse> getTransaction();
+    List<TransactionResponse> getAll();
 }
