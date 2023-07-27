@@ -19,7 +19,6 @@ public class TagFinanceController {
     }
 
     @PostMapping("/create")
-
     public ResponseGeneral<TagFinanceResponse> create(@RequestBody TagFinanceRequest tagfinanceRequest) {
         return new ResponseGeneral<>(MessageResponse.CREATE_TAG_SUCCESS, tagFinanceService.create(tagfinanceRequest));
     }
@@ -40,6 +39,4 @@ public class TagFinanceController {
         tagFinanceService.delete(id);
         return new ResponseGeneral<>(MessageResponse.DELETE_TAG_SUCCESS);
     }
-
-
 }
