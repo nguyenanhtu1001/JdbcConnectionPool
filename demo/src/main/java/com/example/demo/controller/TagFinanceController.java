@@ -20,23 +20,23 @@ public class TagFinanceController {
 
     @PostMapping("/create")
     public ResponseGeneral<TagFinanceResponse> create(@RequestBody TagFinanceRequest tagfinanceRequest) {
-        return new ResponseGeneral<>(MessageResponse.CREATE_TAG_SUCCESS, tagFinanceService.create(tagfinanceRequest));
+        return new ResponseGeneral<>(MessageResponse.Message.CREATE_TAG_SUCCESS, tagFinanceService.create(tagfinanceRequest));
     }
 
     @GetMapping("/get")
     public ResponseGeneral<List<TagFinanceResponse>> getAll() {
         List<TagFinanceResponse> tagFinanceResponses = tagFinanceService.getAll();
-        return new ResponseGeneral<>(MessageResponse.GET_TAG_SUCCESS, tagFinanceResponses);
+        return new ResponseGeneral<>(MessageResponse.Message.GET_TAG_SUCCESS, tagFinanceResponses);
     }
 
     @PutMapping("/update/{id}")
     public ResponseGeneral<TagFinanceResponse> update(@RequestBody TagFinanceRequest tagFinanceRequest, @PathVariable(name = "id") int id) {
-        return new ResponseGeneral<>(MessageResponse.UPDATE_TAG_SUCCESS, tagFinanceService.update(tagFinanceRequest, id));
+        return new ResponseGeneral<>(MessageResponse.Message.UPDATE_TAG_SUCCESS, tagFinanceService.update(tagFinanceRequest, id));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseGeneral<Void> delete(@PathVariable(name = "id") int id) {
         tagFinanceService.delete(id);
-        return new ResponseGeneral<>(MessageResponse.DELETE_TAG_SUCCESS);
+        return new ResponseGeneral<>(MessageResponse.Message.DELETE_TAG_SUCCESS);
     }
 }

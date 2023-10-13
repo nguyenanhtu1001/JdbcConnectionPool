@@ -12,12 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.example.demo.constant.MessageResponse.SQLQuery.*;
+import static com.example.demo.dao.implement.TransactionDAOImpl.SELECT_ALL;
+
 public class TagFinanceDAOImpl implements TagFinanceDAO {
-    public static final String ADD_TAG = "INSERT INTO tag_finance (name, description) VALUES (?, ?)";
-    public static final String SELECT_ALL = "SELECT id, name, description FROM tag_finance";
-    public static final String DELETE_TAG = "DELETE FROM tag_finance WHERE id =?";
-    public static final String UPDATE_TAG = "UPDATE tag_finance SET name =?, description =? WHERE id =?";
-    public static final String GET_TAG = "SELECT id, name, description FROM tag_finance WHERE id =?";
 
     @Override
     public TagFinance create(TagFinance tagFinance) {
