@@ -1,6 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.entity.TagFinance;
+import com.example.demo.model.TagFinance;
 
 import java.util.List;
 

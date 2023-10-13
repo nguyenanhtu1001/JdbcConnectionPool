@@ -1,11 +1,9 @@
-package com.example.demo.entity;
+package com.example.demo.model;
 
-import com.example.demo.dto.request.TransactionRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity

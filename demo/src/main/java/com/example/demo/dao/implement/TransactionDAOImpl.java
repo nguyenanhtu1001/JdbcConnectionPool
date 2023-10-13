@@ -4,7 +4,7 @@ package com.example.demo.dao.implement;
 import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TransactionDAO;
 import com.example.demo.dto.response.TransactionResponse;
-import com.example.demo.entity.Transaction;
+import com.example.demo.model.Transaction;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

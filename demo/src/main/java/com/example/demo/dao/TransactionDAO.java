@@ -1,7 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.dto.response.TransactionResponse;
-import com.example.demo.entity.Transaction;
+import com.example.demo.model.Transaction;
 
 import java.util.List;
 

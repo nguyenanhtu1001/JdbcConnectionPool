@@ -1,7 +1,7 @@
 package com.example.demo.dto.response;
 
 import lombok.Getter;
-import com.example.demo.entity.TagFinance;
+import com.example.demo.model.TagFinance;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 

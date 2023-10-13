@@ -2,7 +2,7 @@ package com.example.demo.dao.implement;
 
 import com.example.demo.dao.DataSource;
 import com.example.demo.dao.TagFinanceDAO;
-import com.example.demo.entity.TagFinance;
+import com.example.demo.model.TagFinance;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,7 +1,7 @@
 package com.example.demo.dto.response;
 
 import com.example.demo.dto.request.TransactionRequest;
-import com.example.demo.entity.Transaction;
+import com.example.demo.model.Transaction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

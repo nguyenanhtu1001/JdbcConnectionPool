@@ -7,8 +7,8 @@ import com.example.demo.dao.implement.TransactionDAOImpl;
 import com.example.demo.dto.request.TransactionRequest;
 import com.example.demo.dto.response.TagFinanceResponse;
 import com.example.demo.dto.response.TransactionResponse;
-import com.example.demo.entity.TagFinance;
-import com.example.demo.entity.Transaction;
+import com.example.demo.model.TagFinance;
+import com.example.demo.model.Transaction;
 import com.example.demo.service.TransactionService;
 import org.springframework.stereotype.Service;
 

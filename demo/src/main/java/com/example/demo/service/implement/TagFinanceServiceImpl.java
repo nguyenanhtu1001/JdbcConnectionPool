@@ -4,11 +4,10 @@ import com.example.demo.dao.TagFinanceDAO;
 import com.example.demo.dao.implement.TagFinanceDAOImpl;
 import com.example.demo.dto.request.TagFinanceRequest;
 import com.example.demo.dto.response.TagFinanceResponse;
-import com.example.demo.entity.TagFinance;
+import com.example.demo.model.TagFinance;
 import com.example.demo.service.TagFinanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
